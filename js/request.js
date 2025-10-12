@@ -25,8 +25,11 @@ export async function addElement(newData) {
     const token = localStorage.getItem("token");
     const req = await fetch(baseURL + "/cars", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      Authorization: `Bearer ${token}`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+
       body: JSON.stringify(newData),
     });
     const res = await req.json();
@@ -40,8 +43,11 @@ export async function editElement(editedData) {
     const token = localStorage.getItem("token");
     const req = await fetch(baseURL + `/cars/${editedData.id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      Authorization: `Bearer ${token}`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+
       body: JSON.stringify(editedData),
     });
     const res = await req.json();
@@ -50,7 +56,7 @@ export async function editElement(editedData) {
     throw new Error("Ma'lumot tahrirlashda xatolik bo'ldi");
   }
 }
-export async function getById(id) {
+export async function deleteById(id) {
   try {
     const token = localStorage.getItem("token");
     await fetch(baseURL + `/cars/${id}`, {

@@ -7,7 +7,49 @@
     <link rel="stylesheet" href="./css/output.css" />
   </head>
   <body>
-    <h1>heloo</h1>
+    <!-- offline page  -->
+    <div
+      class="fixed inset-0 bg-accent flex items-center justify-center"
+      id="offlinePage"
+    >
+      <div class="flex flex-col max-w-96 w-full">
+        <h2 class="text-3xl mb-3">Internet bilan muammo bor!</h2>
+        <p>
+          Siz hozr Offline holatidasiz!Saytdan foydanalish uchun internetga
+          ulaning!
+        </p>
+      </div>
+    </div>
+    <section class="py-10">
+      <div class="container mx-auto px-5">
+        <div class="flex items-center gap-5 pb-5">
+          <select class="select select-primary" id=" ">
+            <option disabled selected>Nima boyicha filter qilmoqchisiz?</option>
+            <option value="colorName">Rang</option>
+            <option value="category">Turkum</option>
+            <option value="year">Yil</option>
+            <option value="country">Davlat</option>
+            <option value="maxSpeed">Tezlik</option>
+          </select>
+          <select class="select select-primary hidden" id="filterValueSelect">
+            <option disabled selected>All</option>
+          </select>
+        </div>
+        <div class="grid-cols-3 gap-5" id="container"></div>
+      </div>
+    </section>
+    <!-- templates  -->
+    <template id="cardTemplate"
+      ><div class="card bg-base-100 card-md shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title"></h2>
+          <p></p>
+          <div class="justify-end card-actions">
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div></template
+    >
     <script type="module" src="./js/app.js"></script>
   </body>
 </html>

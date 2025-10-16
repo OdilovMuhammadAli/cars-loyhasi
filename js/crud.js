@@ -1,13 +1,15 @@
-import { changeLocalDaa, localData } from "./localData.js";
+import { changeLocalData, localData } from "./localData.js";
 
-export function deleteElementLocal(data, id) {
-  const result = data.filter((el) => el.id != id);
-  changeLocalDaa(result);
+export function deleteElementLocal(id) {
+  const result = localData.filter((el) => el.id != id);
+  changeLocalData(result);
 }
+
 export function addElementLocal(newData) {
   const result = [newData, ...localData];
-  changeLocalDaa(result);
+  changeLocalData(result);
 }
+
 export function editElementLocal(editedData) {
   const result = localData.map((el) => {
     if (el.id === editedData.id) {
@@ -16,5 +18,6 @@ export function editElementLocal(editedData) {
       return el;
     }
   });
-  changeLocalDaa(result);
+
+  changeLocalData(result);
 }

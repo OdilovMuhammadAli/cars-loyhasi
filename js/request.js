@@ -6,7 +6,7 @@ export async function getAll(query = "") {
     const res = await req.json();
     return res;
   } catch {
-    throw new Error("Ma'lumotlar olishda xatolik bo'ldi");
+    throw new Error("Ma`lumotlarni olishda xatolik bo`ldi");
   }
 }
 
@@ -16,7 +16,7 @@ export async function getById(id) {
     const res = await req.json();
     return res;
   } catch {
-    throw new Error("Ma'lumotni olishda xatolik bo'ldi");
+    throw new Error("Ma`lumotni olishda xatolik bo`ldi");
   }
 }
 
@@ -29,15 +29,15 @@ export async function addElement(newData) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-
       body: JSON.stringify(newData),
     });
     const res = await req.json();
     return res;
   } catch {
-    throw new Error("Ma'lumot qoshishda xatolik bo'ldi");
+    throw new Error("Ma`lumot qo`shishda xatolik bo`ldi");
   }
 }
+
 export async function editElement(editedData) {
   try {
     const token = localStorage.getItem("token");
@@ -47,16 +47,16 @@ export async function editElement(editedData) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-
       body: JSON.stringify(editedData),
     });
     const res = await req.json();
     return res;
   } catch {
-    throw new Error("Ma'lumot tahrirlashda xatolik bo'ldi");
+    throw new Error("Ma`lumotni tahrirlashda xatolik bo`ldi");
   }
 }
-export async function deleteById(id) {
+
+export async function deleteElement(id) {
   try {
     const token = localStorage.getItem("token");
     await fetch(baseURL + `/cars/${id}`, {
@@ -67,6 +67,6 @@ export async function deleteById(id) {
     });
     return id;
   } catch {
-    throw new Error("Ma'lumotni o'chirishda xatolik bo'ldi");
+    throw new Error("Ma`lumotni o`chirishda xatolik bo`ldi");
   }
 }

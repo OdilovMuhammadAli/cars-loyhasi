@@ -1,35 +1,35 @@
 import { checkAuth } from "./check-auth.js";
-import { deleteElementLocal, editElementLocal } from "./crud.js";
-import { changeLocalDaa, localData } from "./localData.js";
-import { deleteById, editElement, getAll } from "./request.js";
+import { deleteElementLocal } from "./crud.js";
+import { changeLocalData } from "./localData.js";
+import { deleteElement, getAll } from "./request.js";
 import { ui } from "./ui.js";
 
-const elEditedForm = document.getElementById("editForm");
-const elEditModal = document.getElementById("editModal");
-const elContainer = document.getElementById("container");
 const elOfflinePage = document.getElementById("offlinePage");
-const elFilterTypeSelect = document.getElementById("filterTypeSelect");
 const elFilterValueSelect = document.getElementById("filterValueSelect");
+const elFilterTypeSelect = document.getElementById("filterTypeSelect");
 const elSearchInput = document.getElementById("searchInput");
+const elFilterInput = document.getElementById("filterInput");
+const elLoading = document.getElementById("loading");
 
-let beckendData = null;
+let backendData = null;
 let worker = new Worker("./worker.js");
 let filterKey = null;
 let filterValue = null;
-let uiData = null;
-let editedElmentId = null;
+
 window.addEventListener("DOMContentLoaded", () => {
-  if (window.navigator.onLine === false) {
-    elOfflinePage.classList.remove("hidden");
-  } else {
+  if (window.navigator.onLine === true) {
     elOfflinePage.classList.add("hidden");
+  } else {
+    elOfflinePage.classList.remove("hidden");
   }
 
   getAll()
     .then((res) => {
-      beckendData = res;
-      changeLocalDaa(beckendData.data);
-      ui(uiData);
+      backendData = res;
+      changeLocalData(backendData.data);
+      elLoading.classList.add("hidden");
+      elFilterInput.classList.remove("hidden");
+      elFilterInput.classList.add("flex");
     })
     .catch((error) => {
       alert(error.message);
@@ -41,14 +41,16 @@ elFilterTypeSelect.addEventListener("change", (evt) => {
   filterKey = value;
   worker.postMessage({
     functionName: "filterByType",
-    params: [beckendData.data, value],
+    params: [backendData.data, value],
   });
 });
-elFilterTypeSelect.addEventListener("change", (evt) => {
+
+elFilterValueSelect.addEventListener("change", (evt) => {
   const value = evt.target[evt.target.selectedIndex].value;
   filterValue = value;
-  const elContainer = document.getElementById("container");
-  elContainer.innerHTML = "";
+
+  elContainer.innerHTML = null;
+
   if (filterKey && filterValue) {
     getAll(`?${filterKey}=${filterValue}`)
       .then((res) => {
@@ -64,14 +66,12 @@ elSearchInput.addEventListener("input", (evt) => {
   const key = evt.target.value;
   worker.postMessage({
     functionName: "search",
-    params: [beckendData.data, key],
+    params: [backendData.data, key],
   });
 });
 
 worker.addEventListener("message", (evt) => {
-  console.log(evt);
-
-  // select
+  // Select
   const response = evt.data;
 
   if (response.target === "filterByType") {
@@ -82,6 +82,7 @@ worker.addEventListener("message", (evt) => {
     option.disabled = true;
     option.textContent = "All";
     elFilterValueSelect.appendChild(option);
+
     result.forEach((element) => {
       const option = document.createElement("option");
       option.textContent = element;
@@ -94,7 +95,7 @@ worker.addEventListener("message", (evt) => {
     if (response.result.length > 0) {
       ui(response.result);
     } else {
-      alert("no-nono");
+      alert("No data");
     }
   }
 });
@@ -102,66 +103,46 @@ worker.addEventListener("message", (evt) => {
 window.addEventListener("online", () => {
   elOfflinePage.classList.add("hidden");
 });
+
 window.addEventListener("offline", () => {
   elOfflinePage.classList.remove("hidden");
 });
-// CRUD
+
+// Crud
+const elContainer = document.getElementById("container");
+
 elContainer.addEventListener("click", (evt) => {
   const target = evt.target;
+
+  // Edit
   if (target.classList.contains("js-edit")) {
     if (checkAuth()) {
-      editedElmentId = target.id;
-      elEditModal.showModal();
-      const findElement = localData.find((el) => el.id === target.id);
-
-      elEditedForm.name.value = findElement.name;
-      elEditedForm.description.value = findElement.description;
     } else {
-      window.location.href = "/pages/register.html";
-      alert("Royxatdan otishingiz shart");
+      alert("Ro`yxatdan o`tishingiz kerak");
     }
   }
+
+  // Delete
 
   if (target.classList.contains("js-delete")) {
-    if (checkAuth() && confirm("rostan ochirasmi?")) {
-      deleteById(target.id)
+    if (checkAuth() && confirm("Rostdan ham o`chirmoqchimisiz?")) {
+      elContainer.innerHTML = null;
+      elLoading.classList.remove("hidden");
+      elFilterInput.classList.add("hidden");
+      elFilterInput.classList.remove("flex");
+      deleteElement(target.id)
         .then((id) => {
-          console.log(id);
-
           deleteElementLocal(id);
         })
-        .catch(() => {})
-        .finally(() => {});
+        .catch()
+        .finally(() => {
+          elLoading.classList.add("hidden");
+          elFilterInput.classList.remove("hidden");
+          elFilterInput.classList.add("flex");
+        });
     } else {
-      window.location.href = "/pages/register.html";
-      alert("Royxatdan otishingiz shart");
+      location.href = "./pages/login.html";
+      alert("Ro`yxatdan o`tishingiz kerak");
     }
-  }
-  if (target.classList.contains("js-info")) {
-    if (checkAuth()) {
-    } else {
-      window.location.href = "/pages/register.html";
-      alert("Royxatdan otishingiz shart");
-    }
-  }
-});
-elEditedForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const forDataReg = new FormData(elEditedForm);
-  const result = {};
-  FormData.forEach((value, key) => {
-    result[key] = value;
-  });
-  if (editedElmentId) {
-    result.id = editedElmentId;
-    editElement(result)
-      .then((res) => {
-        editElementLocal(res);
-      })
-      .catch(() => {})
-      .finally(() => {
-        editedElmentId = null;
-        elEditModal.close();
-      });
   }
 });

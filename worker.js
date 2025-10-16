@@ -11,6 +11,7 @@ function search(data, key) {
       result.push(element);
     }
   });
+
   return result;
 }
 
@@ -19,9 +20,10 @@ const actions = {
   search,
 };
 
-onmessage = (e) => {
-  const func = e.data.functionName;
-  const params = e.data.params;
+onmessage = (evt) => {
+  const func = evt.data.functionName;
+  const params = evt.data.params;
+
   const result = actions[func](...params);
 
   postMessage({ result, target: func });

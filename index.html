@@ -5,8 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/output.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&display=swap");
+    </style>
   </head>
-  <body>
+  <body class="bg-gray-950 text-white font-sans">
+    <!-- header  -->
+    <nav
+      class="flex justify-center gap-8 bg-gray-900 py-4 text-lg sticky top-0 z-50"
+    >
+      <a href="#" class="hover:text-blue-400">Home</a>
+      <a href="#" class="hover:text-blue-400">Gallery</a>
+      <a href="#" class="hover:text-blue-400">Reviews</a>
+      <a href="#" class="hover:text-blue-400">Innovations</a>
+      <a href="#" class="hover:text-blue-400">Community</a>
+      <a href="#" class="hover:text-blue-400">About Us</a>
+    </nav>
+
+    <section class="relative mt-10 max-w-6xl mx-auto">
+      <div class="overflow-hidden rounded-2xl shadow-lg" id="carousel">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+          class="w-full h-[500px] object-cover"
+          alt="car"
+        />
+        <div class="absolute bottom-8 left-8 bg-black/50 p-4 rounded-xl">
+          <h2 class="text-3xl font-bold">Lamborghini Aventador</h2>
+          <p class="text-gray-300">The epitome of style and performance</p>
+        </div>
+      </div>
+      <button
+        id="prev"
+        class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 px-4 py-2 rounded-full hover:bg-black/70"
+      >
+        👈
+      </button>
+      <button
+        id="next"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 px-4 py-2 rounded-full hover:bg-black/70"
+      >
+        👉
+      </button>
+    </section>
+
+    <!-- 3D CONFIGURATOR -->
+    <section class="mt-20 text-center">
+      <h2 class="text-3xl font-bold mb-6">
+        3D Moshinangizni Korinishi
+        <h5><br />(Rangini tanlab-moshinongizni korinishi korib oling!)</h5>
+      </h2>
+      <div id="scene" class="w-full h-[400px]"></div>
+      <div class="mt-4 flex justify-center gap-4">
+        <button
+          id="colorRed"
+          class="px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400"
+        >
+          Red
+        </button>
+        <button
+          id="colorBlue"
+          class="px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-400"
+        >
+          Blue
+        </button>
+        <button
+          id="colorBlack"
+          class="px-4 py-2 bg-black border border-gray-500 rounded-lg"
+        >
+          Black
+        </button>
+        <button
+          id="colorWhite"
+          class="px-4 py-2 bg-white border border-gray-500 rounded-lg text-black"
+        >
+          White
+        </button>
+        <button
+          id="colorYellow"
+          class="px-4 py-2 bg-yellow-400 border border-gray-500 rounded-lg text-black"
+        >
+          Yellow
+        </button>
+        <button
+          id="colorPurple"
+          class="px-4 py-2 bg-purple-400 border border-gray-500 rounded-lg text-black"
+        >
+          Purple
+        </button>
+      </div>
+    </section>
     <!-- Offline Page -->
     <div
       class="fixed inset-0 bg-accent items-center justify-center z-10 hidden"
@@ -17,7 +105,68 @@
         <p>Saytdan foydalanish uchun Internetga ulaning!</p>
       </div>
     </div>
+    <!-- script header uchun  -->
+    <script>
+      // --- CAROUSEL LOGIC ---
+      const images = [
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d",
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a",
+      ];
+      let index = 0;
+      const img = document.querySelector("#carousel img");
+      document.querySelector("#next").onclick = () => {
+        index = (index + 1) % images.length;
+        img.src = images[index];
+      };
+      document.querySelector("#prev").onclick = () => {
+        index = (index - 1 + images.length) % images.length;
+        img.src = images[index];
+      };
 
+      // --- 3D CONFIGURATOR ---
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / 400,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, 400);
+      document.getElementById("scene").appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry(2, 1, 4);
+      const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+      const car = new THREE.Mesh(geometry, material);
+      scene.add(car);
+
+      const light = new THREE.PointLight(0xffffff, 2);
+      light.position.set(5, 5, 5);
+      scene.add(light);
+      camera.position.z = 6;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        car.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      document.getElementById("colorRed").onclick = () =>
+        car.material.color.set(0xff0000);
+      document.getElementById("colorBlue").onclick = () =>
+        car.material.color.set(0x007bff);
+      document.getElementById("colorBlack").onclick = () =>
+        car.material.color.set(0x000000);
+      document.getElementById("colorWhite").onclick = () =>
+        car.material.color.set(0xffffff);
+      document.getElementById("colorYellow").onclick = () =>
+        car.material.color.set(0xffff00);
+      document.getElementById("colorPurple").onclick = () =>
+        car.material.color.set(0x8000ff);
+    </script>
+    <h3 class="flex justify-center text-4xl">Moshinar haqida</h3>
     <!-- Loading -->
 
     <div class="flex justify-center items-center h-screen" id="loading">
@@ -145,7 +294,132 @@
         </div>
       </div>
     </template>
+    <!-- footer  -->
+    <footer
+      class="relative bg-gradient-to-r from-black via-neutral-900 to-gray-800 border-t-2 border-sky-500 shadow-[0_-2px_30px_rgba(0,180,255,0.2)] overflow-hidden py-16 px-5"
+    >
+      <!-- Moving light effect -->
+      <div
+        class="absolute top-0 left-[-50%] w-[200%] h-full bg-[radial-gradient(circle_at_50%_120%,rgba(0,180,255,0.1),transparent_70%)] opacity-40 rev-animation"
+      ></div>
 
+      <div class="relative z-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Explore -->
+        <div>
+          <h3 class="text-sky-400 uppercase mb-4 font-bold tracking-wide">
+            Explore
+          </h3>
+          <ul class="space-y-2 text-gray-400">
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Models</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Test Drive</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Dealers</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Connect -->
+        <div>
+          <h3 class="text-sky-400 uppercase mb-4 font-bold tracking-wide">
+            Connect
+          </h3>
+          <div class="flex gap-3 mb-4">
+            <a
+              href="#"
+              class="w-10 h-10 border-2 border-sky-400 text-sky-400 rounded-full flex items-center justify-center hover:bg-sky-400 hover:text-black shadow-lg hover:shadow-sky-500/50 hover:scale-110 transition-all duration-300"
+              >X</a
+            >
+            <a
+              href="#"
+              class="w-10 h-10 border-2 border-sky-400 text-sky-400 rounded-full flex items-center justify-center hover:bg-sky-400 hover:text-black shadow-lg hover:shadow-sky-500/50 hover:scale-110 transition-all duration-300"
+              >IG</a
+            >
+            <a
+              href="#"
+              class="w-10 h-10 border-2 border-sky-400 text-sky-400 rounded-full flex items-center justify-center hover:bg-sky-400 hover:text-black shadow-lg hover:shadow-sky-500/50 hover:scale-110 transition-all duration-300"
+              >YT</a
+            >
+          </div>
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Enter your email..."
+              class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-full px-4 py-2 outline-none focus:border-sky-400 focus:shadow-[0_0_10px_#00b4ff] transition-all duration-300"
+            />
+            <button
+              class="absolute right-1 top-1 bottom-1 bg-sky-400 text-black font-semibold rounded-full px-4 hover:bg-sky-500 hover:shadow-[0_0_15px_#00b4ff] transition-all duration-300"
+            >
+              Start
+            </button>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div>
+          <h3 class="text-sky-400 uppercase mb-4 font-bold tracking-wide">
+            About
+          </h3>
+          <ul class="space-y-2 text-gray-400">
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Our Story</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Sustainability</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Heritage</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-sky-400 hover:translate-x-1 transition-all duration-300 inline-block"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tail lights -->
+      <div
+        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-orange-400 to-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] tail-lights"
+      ></div>
+    </footer>
     <script type="module" src="./js/app.js"></script>
   </body>
 </html>

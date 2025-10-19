@@ -1,102 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     <link rel="stylesheet" href="../css/output.css" />
   </head>
-  <body>
-    <div id="formRegister">
-      <h1 class="flex text-2xl justify-center">Register:</h1>
-      <label class="flex justify-center input validator">
-        <svg
-          class="h-[1em] opacity-50"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <g
-            stroke-linejoin="round"
-            stroke-linecap="round"
-            stroke-width="2.5"
-            fill="none"
-            stroke="currentColor"
-          >
-            <path
-              d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
-            ></path>
-            <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
-          </g>
-        </svg>
-        <input
-          type="password"
-          required
-          placeholder="Password"
-          minlength="8"
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-          title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
-        />
-      </label>
-      <p class="validator-hint hidden">
-        Must be more than 8 characters, including
-        <br />At least one number <br />At least one lowercase letter <br />At
-        least one uppercase letter
-      </p>
-      <div class="join">
+  <body
+    class="bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center min-h-screen"
+  >
+    <a href="../index.html">Asosiy sahifa</a>
+
+    <div class="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 w-[90%] max-w-md">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Ro‘yxatdan o‘tish
+      </h1>
+
+      <form class="space-y-4">
+        <!-- Ism -->
         <div>
-          <label class="input validator join-item">
-            <svg
-              class="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                stroke-linejoin="round"
-                stroke-linecap="round"
-                stroke-width="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-              </g>
-            </svg>
-            <input type="email" placeholder="mail@site.com" required />
-          </label>
-          <div class="validator-hint hidden">Enter valid email address</div>
+          <label class="block text-gray-600 mb-1" for="name">Ism</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Ismingiz"
+            class="w-full px-4 py-2 rounded-xl border border-gray-300 text-black focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
         </div>
-        <button class="btn btn-neutral join-item">Join</button>
-      </div>
-      <button class="btn bg-white text-black border-[#e5e5e5]">
-        <svg
-          aria-label="Google logo"
-          width="16"
-          height="16"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 512 512"
+
+        <!-- Email -->
+        <div>
+          <label class="block text-gray-600 mb-1" for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Email manzilingiz"
+            class="w-full px-4 py-2 rounded-xl border text-black border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+        </div>
+
+        <!-- Parol -->
+
+        <!-- Register tugmasi -->
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition font-semibold mt-4"
         >
-          <g>
-            <path d="m0 0H512V512H0" fill="#fff"></path>
-            <path
-              fill="#34a853"
-              d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-            ></path>
-            <path
-              fill="#4285f4"
-              d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-            ></path>
-            <path
-              fill="#fbbc02"
-              d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-            ></path>
-            <path
-              fill="#ea4335"
-              d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-            ></path>
-          </g>
-        </svg>
-        Login with Google
-      </button>
+          Ro'yxatdan o'tish
+        </button>
+      </form>
+
+      <!-- Login link -->
+      <p class="text-center text-gray-500 text-sm mt-4">
+        Loginiz bormi?
+        <a href="./login.html" class="text-blue-600 hover:underline">Kirish</a>
+      </p>
     </div>
     <script type="module" src="../js/pages/register.js"></script>
   </body>

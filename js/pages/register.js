@@ -1,34 +1,46 @@
-const elFormReg = document.getElementById("formRegister");
-export async function Register(user) {
-  try {
-    const req = await fetch("https://json-api.uz/project/fn44/auth/register", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+const elForm = document.getElementById("form");
 
-      body: JSON.stringify(user),
-    });
+async function register(user) {
+  try {
+    const req = await fetch(
+      "https://json-api.uz/api/project/fn44/auth/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    );
+
     const res = await req.json();
     return res;
   } catch {
-    throw new Error("regestratsiyada xatolik bo'ldi");
+    throw new Error("Ro'yhatdan o'tishda xatolik bo'ldi!");
   }
 }
-elFormReg.addEventListener("submit", (evt) => {
+
+elForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  const forDataReg = new FormData(elFormReg);
+
+  const formData = new FormData(elForm);
   const result = {};
-  FormData.forEach((value, key) => {
+  formData.forEach((value, key) => {
     result[key] = value;
   });
-  console.log(result);
 
-  Register(result)
+  register(result)
     .then((res) => {
-      localStorage.setItem("token", res.access_token);
-      window.location.href = "../../index.html";
+      if (res?.access_token) {
+        localStorage.setItem("token", res.access_token);
+        window.location.href = "../../index.html";
+      } else {
+        alert(
+          "Ro'yxatdan o'tishda xatolik: " + (res?.message || "noma'lum xato")
+        );
+      }
     })
-    .catch(() => {})
-    .finally(() => {});
+    .catch((err) => {
+      alert(err.message);
+    });
 });

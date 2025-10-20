@@ -3,15 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Elite Drive — Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .glow-border {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+      }
+
+      .luxury-gradient {
+        background: linear-gradient(135deg, #c0a060, #f5e6ca, #a38a00);
+      }
+
+      .input-focus:focus {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        border-color: #f5e6ca;
+      }
+
+      .btn-hover:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      }
+
+      .fade-in {
+        animation: fadeIn 1.5s ease-in-out forwards;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
-  <body>
-    <h1>Login Sahifasi</h1>
-    <form id="form">
-      <input type="text" name="username" placeholder="Ismingizni kiriting" />
-      <input type="password" name="password" placeholder="parolni kiriting" />
-      <button type="submit">Tasdiqlash</button>
-    </form>
+
+  <body
+    class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+    style="
+      background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1950&q=80');
+    "
+  >
+    <div
+      class="glow-border bg-black/60 text-white rounded-2xl px-8 py-10 w-[90%] max-w-md fade-in"
+    >
+      <h1
+        class="text-3xl font-bold mb-6 text-center luxury-gradient bg-clip-text text-transparent"
+      >
+        Welcome to Elite Drive
+      </h1>
+
+      <p class="text-gray-300 text-center mb-8">
+        Sign in to your luxury experience
+      </p>
+
+      <form class="space-y-6" id="form">
+        <div>
+          <label class="block text-sm font-medium mb-2">Username</label>
+          <input
+            name="email"
+            type="text"
+            placeholder="fn44"
+            class="w-full px-4 py-3 rounded-lg bg-transparent border border-gray-400 text-white placeholder-gray-400 input-focus transition duration-200"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-2">Password</label>
+          <input
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            class="w-full px-4 py-3 rounded-lg bg-transparent border border-gray-400 text-white placeholder-gray-400 input-focus transition duration-200"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 mt-4 rounded-lg font-semibold text-black luxury-gradient btn-hover transition duration-200"
+        >
+          Login
+        </button>
+
+        <p class="text-sm text-center text-gray-400 mt-4">
+          Don't have an account?
+          <a href="./register.html" class="text-yellow-400 hover:underline"
+            >Register</a
+          >
+        </p>
+      </form>
+    </div>
     <script type="module" src="../js/pages/login.js"></script>
   </body>
 </html>

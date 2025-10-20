@@ -1,61 +1,132 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
-    <link rel="stylesheet" href="../css/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: radial-gradient(circle at bottom, #020617, #000);
+        overflow: hidden;
+      }
+
+      /* Фон с анимацией */
+      .car-bg {
+        position: absolute;
+        inset: 0;
+        background: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70")
+          center/cover no-repeat;
+        opacity: 0.2;
+        animation: moveBg 20s linear infinite;
+      }
+
+      @keyframes moveBg {
+        from {
+          transform: scale(1) translateX(0);
+        }
+        to {
+          transform: scale(1.1) translateX(-50px);
+        }
+      }
+
+      /* Светящиеся элементы */
+      .glow {
+        box-shadow: 0 0 20px 3px #00b4d8;
+      }
+
+      .neon-border {
+        border: 1px solid rgba(0, 180, 216, 0.5);
+        backdrop-filter: blur(8px);
+      }
+
+      .neon-input:focus {
+        box-shadow: 0 0 10px 2px #00b4d8;
+        border-color: #00b4d8;
+      }
+
+      /* Кнопка “Start Your Journey” */
+      .start-btn {
+        transition: 0.4s ease;
+        box-shadow: 0 0 15px 3px #ff004c;
+      }
+
+      .start-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px 5px #ff004c;
+      }
+
+      /* Плавная пульсация формы */
+      .pulse {
+        animation: pulse 3s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(0, 180, 216, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
+        }
+      }
+    </style>
   </head>
   <body
-    class="bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center min-h-screen"
+    class="text-white min-h-screen flex items-center justify-center relative"
   >
-    <a href="../index.html">Asosiy sahifa</a>
+    <div class="car-bg"></div>
 
-    <div class="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 w-[90%] max-w-md">
-      <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-        Ro‘yxatdan o‘tish
+    <!-- Карточка формы -->
+    <div
+      class="relative z-10 w-full max-w-md p-8 rounded-2xl neon-border bg-black/50 pulse"
+    >
+      <h1 class="text-3xl font-bold text-center mb-6 uppercase tracking-wider">
+        Register Your Car
       </h1>
 
-      <form class="space-y-4">
-        <!-- Ism -->
+      <form class="space-y-5">
+        <div></div>
+
         <div>
-          <label class="block text-gray-600 mb-1" for="name">Ism</label>
+          <label class="block mb-1 text-gray-300">Username</label>
           <input
             type="text"
-            id="name"
-            placeholder="Ismingiz"
-            class="w-full px-4 py-2 rounded-xl border border-gray-300 text-black focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            placeholder="Speedster2025"
+            class="w-full px-4 py-2 rounded-md bg-transparent border border-gray-600 neon-input outline-none"
           />
         </div>
 
-        <!-- Email -->
         <div>
-          <label class="block text-gray-600 mb-1" for="email">Email</label>
+          <label class="block mb-1 text-gray-300">Password</label>
           <input
-            type="text"
-            id="email"
-            placeholder="Email manzilingiz"
-            class="w-full px-4 py-2 rounded-xl border text-black border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            type="password"
+            placeholder="••••••••"
+            class="w-full px-4 py-2 rounded-md bg-transparent border border-gray-600 neon-input outline-none"
           />
         </div>
 
-        <!-- Parol -->
-
-        <!-- Register tugmasi -->
         <button
-          type="submit"
-          class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition font-semibold mt-4"
+          type="button"
+          class="w-full mt-4 py-3 bg-gradient-to-r from-red-600 to-pink-600 font-semibold rounded-md uppercase tracking-wider start-btn"
         >
-          Ro'yxatdan o'tish
+          Start Your Journey
         </button>
       </form>
 
-      <!-- Login link -->
-      <p class="text-center text-gray-500 text-sm mt-4">
-        Loginiz bormi?
-        <a href="./login.html" class="text-blue-600 hover:underline">Kirish</a>
+      <p class="mt-6 text-center text-sm text-gray-400">
+        Already have an account?
+        <a href="./login.html" class="text-[#00b4d8] hover:underline"
+          >Login here</a
+        >
       </p>
     </div>
-    <script type="module" src="../js/pages/register.js"></script>
+
+    <!-- Нижняя анимация — свет фар -->
+    <div
+      class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#00b4d8]/30 to-transparent"
+    ></div>
   </body>
 </html>

@@ -21,7 +21,7 @@ export function ui(data) {
 
     elEditBtn.id = element.id;
     elDeleteBtn.id = element.id;
-    elInfoBtn.id - element.id;
+    elInfoBtn.href = `/pages/details.html?id=${element.id}`;
 
     elTitle.innerText = element.name;
     elDescription.innerText = element.description;

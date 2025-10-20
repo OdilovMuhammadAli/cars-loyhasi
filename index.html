@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>cars</title>
     <link rel="stylesheet" href="./css/output.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -258,9 +258,7 @@
       document.getElementById("colorPurple").onclick = () =>
         car.material.color.set(0x8000ff);
 
-      // Ensure renderer resizes on window resize to keep canvas crisp
       window.addEventListener("resize", () => {
-        // update renderer size to full width and appropriate height
         const sceneEl = document.getElementById("scene");
         const rect = sceneEl.getBoundingClientRect();
         renderer.setSize(rect.width, rect.height);
@@ -534,7 +532,6 @@
 
     <script type="module" src="./js/app.js"></script>
 
-    <!-- Minimal JS for burger menu (only this was added) -->
     <script>
       (function () {
         const burgerBtn = document.getElementById("burgerBtn");

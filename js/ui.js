@@ -32,6 +32,73 @@ export function ui(data) {
     elMaxSpeed.innerHTML = `<strong>Max Tezligi:</strong> ${element.maxSpeed}`;
     elHorsePower.innerHTML = `<strong>Ot kuchi:</strong> ${element.horsepower}`;
     elContainer.append(clone);
+
+    // NAME
+    const nameTrimmed = element.name?.trim() || "";
+    elTitle.innerText = nameTrimmed.length === 0 ? "no-data" : nameTrimmed;
+
+    // YEAR
+    let vaqtinchaYil = element.year;
+    try {
+      const num = Number(vaqtinchaYil);
+      if (!isNaN(num) && num > 1700 && num < 2025) {
+        elYear.innerText = num;
+      } else {
+        elYear.innerText = "no-data";
+      }
+    } catch {
+      elYear.innerText = "no-data";
+    }
+
+    // MAX SPEED
+    const maxSpeedTrimmed = element.maxSpeed?.trim() || "";
+    if (maxSpeedTrimmed.length > 0 && maxSpeedTrimmed.endsWith("km/h")) {
+      elMaxSpeed.innerText = maxSpeedTrimmed;
+    } else {
+      elMaxSpeed.innerText = "no-data";
+    }
+
+    // HORSEPOWER
+    let vaqtincha = element.horsepower;
+    try {
+      if (Number(vaqtincha) && vaqtincha > 0) {
+        elHorsePower.innerText = vaqtincha;
+      } else if (!vaqtincha || vaqtincha.length === 0) {
+        elHorsePower.innerText = "no-data";
+      }
+    } catch {
+      elHorsePower.innerText = "no-data";
+    }
+
+    // DESCRIPTION
+    if (!element.description || element.description.trim() === "") {
+      elDescription.innerText = "no-data";
+    } else {
+      elDescription.innerText = element.description;
+    }
+    // turkum
+    if (!element.category || element.category.trim() === "") {
+      elCategory.innerText = "no-data";
+    } else {
+      elCategory.innerText = element.category;
+    }
+    // davlat
+    if (!element.country || element.country.trim() === "") {
+      elCountry.innerText = "no-data";
+    } else {
+      elCountry.innerText = element.country;
+    }
+    // color
+    if (!element.colorName || element.colorName.trim() === "") {
+      elColorName.innerText = "no-data";
+    } else {
+      elColorName.innerText = element.colorName;
+    }
+    // ID
+    elDeleteBtn.id = element.id;
+    elInfoBtn.href = `/pages/details.html?id=${element.id}`;
+
+    elContainer.appendChild(clone);
   });
 }
 

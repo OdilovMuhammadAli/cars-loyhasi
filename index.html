@@ -10,12 +10,12 @@
       @import url("https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&display=swap");
       .car-button {
         position: relative;
-        width: 280px;
-        height: 120px;
+        width: 140px; /* было 280px */
+        height: 60px; /* было 120px */
         background: linear-gradient(145deg, #1f1f1f, #0d0d0d);
-        border-radius: 60px 60px 25px 25px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7),
-          inset 0 2px 6px rgba(255, 255, 255, 0.1);
+        border-radius: 30px 30px 12px 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7),
+          inset 0 1px 3px rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease;
         overflow: hidden;
       }
@@ -33,11 +33,12 @@
       }
 
       .car-button:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(255, 0, 0, 0.4),
-          inset 0 2px 6px rgba(255, 255, 255, 0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 7px 15px rgba(255, 0, 0, 0.4),
+          inset 0 1px 3px rgba(255, 255, 255, 0.15);
       }
 
+      /* окно */
       .car-window {
         position: absolute;
         top: 15%;
@@ -45,45 +46,47 @@
         width: 50%;
         height: 35%;
         background: linear-gradient(to bottom, #333, #000);
-        border-radius: 50px 50px 10px 10px;
-        box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
+        border-radius: 25px 25px 5px 5px;
+        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
       }
 
+      /* колёса */
       .wheel {
         position: absolute;
-        bottom: -10px;
-        width: 50px;
-        height: 50px;
+        bottom: -5px;
+        width: 25px; /* было 50px */
+        height: 25px;
         background: radial-gradient(circle, #222 40%, #000 80%);
         border-radius: 50%;
-        border: 3px solid #444;
-        box-shadow: inset 0 0 10px #000, 0 0 10px rgba(0, 0, 0, 0.6);
+        border: 2px solid #444;
+        box-shadow: inset 0 0 5px #000, 0 0 5px rgba(0, 0, 0, 0.6);
       }
 
       .wheel::after {
         content: "";
         position: absolute;
-        inset: 10px;
+        inset: 5px; /* уменьшено пропорционально */
         border-radius: 50%;
         background: #555;
-        box-shadow: inset 0 0 5px #000;
+        box-shadow: inset 0 0 3px #000;
       }
 
       .wheel.left {
-        left: 25px;
+        left: 12px;
       }
 
       .wheel.right {
-        right: 25px;
+        right: 12px;
       }
 
+      /* фары */
       .headlight {
         position: absolute;
         top: 40%;
         right: 0;
-        width: 20px;
-        height: 10px;
-        border-radius: 0 5px 5px 0;
+        width: 10px; /* было 20px */
+        height: 5px; /* было 10px */
+        border-radius: 0 3px 3px 0;
         background: radial-gradient(
           circle,
           rgba(255, 255, 200, 0.8),
@@ -97,16 +100,17 @@
         opacity: 1;
       }
 
+      /* текст */
       .label {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: "Orbitron", sans-serif;
-        font-size: 24px;
+        font-size: 12px; /* было 24px */
         color: #e0e0e0;
-        letter-spacing: 3px;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        letter-spacing: 1.5px;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
       }
     </style>
   </head>
@@ -116,6 +120,16 @@
       <div
         class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14"
       >
+        <button
+          class="car-button cursor-pointer scale-75 sm:scale-90 md:scale-100 transition-transform duration-300"
+          id="buttonMod"
+        >
+          <div class="car-window"></div>
+          <div class="wheel left"></div>
+          <div class="wheel right"></div>
+          <div class="headlight"></div>
+          <span class="label text-xs sm:text-sm">MODS</span>
+        </button>
         <!-- Brand / center alignment preserved -->
         <div class="flex items-center">
           <!-- Можно добавить логотип сюда в будущем -->
@@ -202,13 +216,6 @@
       </div>
     </nav>
 
-    <button class="car-button cursor-pointer" id="buttonMod">
-      <div class="car-window"></div>
-      <div class="wheel left"></div>
-      <div class="wheel right"></div>
-      <div class="headlight"></div>
-      <span class="label">MODS</span>
-    </button>
     <section class="relative mt-10 max-w-6xl mx-auto px-4 sm:px-6">
       <div class="overflow-hidden rounded-2xl shadow-lg relative" id="carousel">
         <img
@@ -243,57 +250,62 @@
     </section>
 
     <!-- 3D CONFIGURATOR -->
-    <section class="mt-10 sm:mt-16 text-center px-4">
+    <section
+      class="mt-10 sm:mt-16 text-center px-2 sm:px-4 max-w-full overflow-x-hidden"
+    >
       <h2
-        style="background-color: rgb(0, 0, 0)"
-        class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+        class="text-xl sm:text-3xl md:text-4xl font-bold mb-4 bg-black text-white inline-block px-2 rounded"
       >
-        3D Moshinangizni Korinishi
-        <h5
-          style="background-color: rgb(0, 0, 0)"
-          class="text-sm sm:text-base mt-2 font-normal"
-        >
-          <br />(Rangini tanlab-moshinongizni korinishi korib oling!)
-        </h5>
+        3D Moshinangizni Ko‘rinishi
       </h2>
+
+      <h5
+        class="text-xs sm:text-sm md:text-base mt-2 font-normal bg-black text-gray-300 inline-block px-2 rounded"
+      >
+        (Rangini tanlab — moshinangizni ko‘rinishini ko‘rib oling!)
+      </h5>
+
       <div
         id="scene"
-        class="w-full h-[260px] sm:h-[320px] md:h-[380px] lg:h-[400px]"
+        class="w-full h-[220px] sm:h-[300px] md:h-[380px] lg:h-[420px] mt-4"
       ></div>
-      <div class="mt-4 flex flex-wrap justify-center gap-3">
+
+      <div
+        class="mt-4 flex flex-wrap justify-center gap-2 sm:gap-3 px-1 sm:px-0"
+      >
         <button
           id="colorRed"
-          class="cursor-pointer px-3 py-2 bg-red-500 rounded-lg hover:bg-red-400 text-sm sm:text-base"
+          class="cursor-pointer px-3 py-1.5 sm:py-2 bg-red-500 rounded-lg hover:bg-red-400 text-xs sm:text-sm md:text-base"
         >
           Red
         </button>
         <button
           id="colorBlue"
-          class="cursor-pointer px-3 py-2 bg-blue-500 rounded-lg hover:bg-blue-400 text-sm sm:text-base"
+          class="cursor-pointer px-3 py-1.5 sm:py-2 bg-blue-500 rounded-lg hover:bg-blue-400 text-xs sm:text-sm md:text-base"
         >
           Blue
         </button>
         <button
           id="colorBlack"
-          class="cursor-pointer px-3 py-2 bg-black border border-gray-500 rounded-lg text-sm sm:text-base"
+          class="cursor-pointer px-3 py-1.5 sm:py-2 bg-black border border-gray-500 rounded-lg text-white text-xs sm:text-sm md:text-base"
         >
           Black
         </button>
         <button
           id="colorWhite"
-          class="cursor-pointer px-3 py-2 bg-white border border-gray-500 rounded-lg text-black text-sm sm:text-base"
+          class="cursor-pointer px-3 py-1.5 sm:py-2 bg-white border border-gray-500 rounded-lg text-black text-xs sm:text-sm md:text-base"
         >
           White
         </button>
         <button
           id="colorYellow"
-          class="cursor-pointer px-3 py-2 bg-yellow-400 border border-gray-500 rounded-lg text-black text-sm sm:text-base"
+          class="cursor-pointer px-3 py-1.5 sm:py-2 bg-yellow-400 border border-gray-500 rounded-lg text-black text-xs sm:text-sm md:text-base"
         >
           Yellow
         </button>
         <button
           id="colorPurple"
-          class="cursor-pointer px-3 py-2 bg-purple-400 border border-gray-500 rounded-lg text-black text-sm sm:text-base"
+          class="cursor-pointer px-3 py-1.5 sm:py-2 bg-purple-400 border border-gray-500 rounded-lg text-black text-xs sm:text-sm md:text-base"
         >
           Purple
         </button>
@@ -544,7 +556,10 @@
     </template>
     <!-- pagination  -->
 
-    <div class="join" id="pagination"></div>
+    <div
+      class="join flex justify-center flex-wrap gap-2 mt-6 px-2"
+      id="pagination"
+    ></div>
     <!-- add  -->
     <!-- footer  -->
     <footer

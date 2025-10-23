@@ -5,6 +5,8 @@ import { deleteElement, editElement, getAll } from "./request.js";
 import { pagination, ui } from "./ui.js";
 // dark-mod
 const elBtnMods = document.getElementById("buttonMod");
+
+// При клике переключаем тему и сохраняем в localStorage
 elBtnMods.addEventListener("click", () => {
   if (document.body.classList.contains("light")) {
     document.body.classList.remove("light");
@@ -14,11 +16,20 @@ elBtnMods.addEventListener("click", () => {
     localStorage.setItem("mode", "light");
   }
 });
+
+// При загрузке страницы — применяем сохранённую тему
+if (localStorage.getItem("mode") === "light") {
+  document.body.classList.add("light");
+}
+
+// Слушаем изменения темы из других вкладок (синхронизация)
 window.addEventListener("storage", (evt) => {
-  if (evt.key === "mode" && editElement.newValue === "light") {
-    document.body.classList.add("light");
-  } else {
-    document.body.classList.remove("light");
+  if (evt.key === "mode") {
+    if (evt.newValue === "light") {
+      document.body.classList.add("light");
+    } else {
+      document.body.classList.remove("light");
+    }
   }
 });
 // Chanel for cyn

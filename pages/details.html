@@ -3,10 +3,162 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Details</title>
-    <link rel="stylesheet" href="" />
+    <title></title>
+    <style>
+      /* ====== Base Page Styling ====== */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: radial-gradient(circle at center, #0a0a0a, #000);
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ====== Card Container ====== */
+      .car-card {
+        width: 320px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        color: #fff;
+        text-align: center;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .car-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(255, 215, 0, 0.25);
+      }
+
+      /* ====== Car Image ====== */
+      .car-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        filter: brightness(0.9) contrast(1.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* ====== Text Section ====== */
+      .car-card h1 {
+        font-size: 1.6rem;
+        margin: 15px 0 5px;
+        background: linear-gradient(90deg, gold, #f5e6ca, #d4af37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .car-card p {
+        font-size: 0.95rem;
+        color: #ccc;
+        margin-bottom: 15px;
+      }
+
+      /* ====== Feature List ====== */
+      .features {
+        list-style: none;
+        text-align: left;
+        padding: 0 25px;
+        margin: 0;
+      }
+      a {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+        padding: 14px 34px;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #ffd700, #ffb700, #ff8c00);
+        background-size: 200%;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        transition: all 0.4s ease;
+        animation: shineMove 3s infinite linear;
+      }
+
+      a:hover {
+        background-position: right center;
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.8),
+          0 0 50px rgba(255, 215, 0, 0.4);
+        transform: scale(1.08);
+      }
+
+      a:active {
+        transform: scale(0.97);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      }
+
+      .features li {
+        margin: 10px 0;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .features li span {
+        font-size: 1.2rem;
+      }
+
+      /* ====== Button ====== */
+      .discover-btn {
+        margin: 25px 0;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        background: linear-gradient(90deg, #c0c0c0, #007bff);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .discover-btn:hover {
+        background: linear-gradient(90deg, #007bff, #c0c0c0);
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+      }
+    </style>
   </head>
   <body>
+    <div class="car-card">
+      <h1 id="name"></h1>
+      <p id="description"></p>
+      <p class="text-gray-700 leading-relaxed" id="category">Category:</p>
+      <span class="text-gray-700 leading-relaxed relative" id="color">
+        Color:
+        <span
+          id="colorBg"
+          class="absolute w-[15px] h-[15px] rounded-[50%] top-[5px] left-[45px] bg-shadow"
+        ></span>
+      </span>
+      <p class="text-gray-700 leading-relaxed" id="colorName">Color Name:</p>
+      <p class="text-gray-700 leading-relaxed" id="country">Country</p>
+      <p class="text-gray-700 leading-relaxed" id="doorCount">DoorCount:</p>
+      <p class="text-gray-700 leading-relaxed" id="engine">Engine:</p>
+      <p class="text-gray-700 leading-relaxed" id="fuelConsumption">
+        fuelConsumtion
+      </p>
+      <p class="text-gray-700 leading-relaxed" id="city">City:</p>
+      <p class="text-gray-700 leading-relaxed" id="combiend">Combiend:</p>
+      <p class="text-gray-700 leading-relaxed" id="highway">Highway:</p>
+      <p class="text-gray-700 leading-relaxed" id="fuelType">FuelType:</p>
+      <p class="text-gray-700 leading-relaxed" id="horsepower">HorsePower:</p>
+      <p class="text-gray-700 leading-relaxed" id="generation">Generation:</p>
+      <p class="text-gray-700 leading-relaxed" id="maxSpeed">MaxSpeed:</p>
+      <p class="text-gray-700 leading-relaxed" id="seatCount">SeatCount:</p>
+      <p class="text-gray-700 leading-relaxed" id="trim">Trim:</p>
+      <p class="text-gray-700 leading-relaxed" id="year">Year:</p>
+
+      <a class="" href="../index.html">Bosh Sahifa</a>
+    </div>
     <script type="module" src="../js/pages/details.js"></script>
   </body>
 </html>

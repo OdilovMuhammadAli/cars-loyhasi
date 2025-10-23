@@ -105,10 +105,11 @@
     <section class="relative mt-10 max-w-6xl mx-auto px-4 sm:px-6">
       <div class="overflow-hidden rounded-2xl shadow-lg relative" id="carousel">
         <img
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+          src="./images/1793987-Vehicles-De-Tomaso-P72-Car-Red-Car-Sport-Car-4K.jpg"
           class="w-full h-[320px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover"
           alt="car"
         />
+
         <div class="absolute bottom-6 left-6 bg-black/60 p-3 sm:p-4 rounded-xl">
           <h2 class="text-2xl sm:text-3xl font-bold">Lamborghini Aventador</h2>
           <p class="text-sm sm:text-base text-gray-300">
@@ -331,6 +332,34 @@
         ></div>
       </div>
     </section>
+    <!-- Modals  -->
+    <!-- Open the modal using ID.showModal() method -->
+    <dialog id="editModal" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold" id="editesElementTitle"></h3>
+        <p class="py-4">Siz shu elementni tahrirlayapsiz</p>
+        <form id="editForm">
+          <input
+            name="name"
+            type="text"
+            placeholder="Mashina nomini kiriting!"
+            class="input"
+          />
+          <textarea
+            name="description"
+            class="textarea"
+            placeholder="Description"
+          ></textarea>
+          <button class="btn btn-active" type="submit">Tasdiqlash</button>
+        </form>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <!-- Templates -->
     <template id="cardTemplate">
@@ -400,7 +429,10 @@
         </div>
       </div>
     </template>
+    <!-- pagination  -->
 
+    <div class="join" id="pagination"></div>
+    <!-- add  -->
     <!-- footer  -->
     <footer
       class="relative bg-gradient-to-r from-black via-neutral-900 to-gray-800 border-t-2 border-sky-500 shadow-[0_-2px_30px_rgba(0,180,255,0.2)] overflow-hidden py-10 sm:py-16 px-5 mt-8"

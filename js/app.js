@@ -3,7 +3,24 @@ import { deleteElementLocal, editElementLocal } from "./crud.js";
 import { changeLocalData, localData } from "./localData.js";
 import { deleteElement, editElement, getAll } from "./request.js";
 import { pagination, ui } from "./ui.js";
-
+// dark-mod
+const elBtnMods = document.getElementById("buttonMod");
+elBtnMods.addEventListener("click", () => {
+  if (document.body.classList.contains("light")) {
+    document.body.classList.remove("light");
+    localStorage.setItem("mode", "dark");
+  } else {
+    document.body.classList.add("light");
+    localStorage.setItem("mode", "light");
+  }
+});
+window.addEventListener("storage", (evt) => {
+  if (evt.key === "mode" && editElement.newValue === "light") {
+    document.body.classList.add("light");
+  } else {
+    document.body.classList.remove("light");
+  }
+});
 // Chanel for cyn
 // const channel1 = new BroadcastChannel("channel_1");
 
